@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Camera playerCamera;
     private float rotationX = 0;
+    private PlayerInputController playerInputController;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        playerInputController = PlayerInputController.Instance;
 
         // Bloquear y ocultar el cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -23,22 +26,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Movimiento del jugador
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = playerInputController.GetPlayerInputDirection();
+        
+        // Si no hay entrada de movimiento, establece moveDirection en Vector3.zero
+        if (moveDirection.magnitude == 0)
+        {
+            moveDirection = Vector3.zero;
+        }
 
-        Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        // Movimiento del jugador usando el controlador de entrada
         controller.Move(moveDirection * speed * Time.deltaTime);
+    }
 
-        // Rotación de la cámara del jugador con el ratón
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-
-        rotationX -= mouseY;
+    void LateUpdate()
+    {
+        Vector2 lookInput = playerInputController.GetPlayerLookDirection();
+        rotationX -= lookInput.y * sensitivity;
         rotationX = Mathf.Clamp(rotationX, -90, 90);
-
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.Rotate(Vector3.up * mouseX);
+        transform.Rotate(Vector3.up * lookInput.x * sensitivity);
     }
 }
+
+
+
+
+
+
 
