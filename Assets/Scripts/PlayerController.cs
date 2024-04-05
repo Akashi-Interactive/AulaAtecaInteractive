@@ -26,21 +26,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 moveDirection = playerInputController.GetPlayerInputDirection();
-        
-        // Si no hay entrada de movimiento, establece moveDirection en Vector3.zero
-        if (moveDirection.magnitude == 0)
+        // Obtener la dirección hacia la que la cámara está mirando
+        Vector3 forward = playerCamera.transform.forward;
+        forward.y = 0f; // Asegurarse de que el movimiento sea en el plano horizontal
+        forward.Normalize();
+
+        // Obtener la dirección del movimiento del jugador
+        Vector3 moveDirection = playerInputController.GetPlayerInputMovementDirection();
+
+        // Movimiento relativo a la dirección de la cámara
+        if (moveDirection.magnitude != 0)
         {
-            moveDirection = Vector3.zero;
+            // Rotar la dirección del movimiento del jugador según la dirección de la cámara
+            moveDirection = Quaternion.Euler(0, playerCamera.transform.eulerAngles.y, 0) * moveDirection;
+            moveDirection.Normalize(); // Normalizar para mantener la misma velocidad en todas las direcciones
         }
 
         // Movimiento del jugador usando el controlador de entrada
         controller.Move(moveDirection * speed * Time.deltaTime);
     }
 
+
     void LateUpdate()
     {
-        Vector2 lookInput = playerInputController.GetPlayerLookDirection();
+        Vector2 lookInput = playerInputController.GetPlayerInputLookDirection();
         rotationX -= lookInput.y * sensitivity;
         rotationX = Mathf.Clamp(rotationX, -90, 90);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

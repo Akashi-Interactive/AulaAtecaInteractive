@@ -23,23 +23,26 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+
     public void OnMove(InputValue moveValue)
     {
+        Debug.Log(moveValue.Get<Vector2>());
         Vector2 inputVector = moveValue.Get<Vector2>();
         movementDirection = new Vector3(inputVector.x, 0f, inputVector.y);
     }
 
     public void OnLook(InputValue lookValue)
     {
+        Debug.Log(lookValue.Get<Vector2>());
         lookDirection = lookValue.Get<Vector2>();
     }
 
-    public Vector3 GetPlayerInputDirection()
+    public Vector3 GetPlayerInputMovementDirection()
     {
         return movementDirection;
     }
 
-    public Vector2 GetPlayerLookDirection()
+    public Vector2 GetPlayerInputLookDirection()
     {
         return lookDirection;
     }
