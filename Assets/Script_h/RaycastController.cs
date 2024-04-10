@@ -1,24 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RaycastController : MonoBehaviour
 {
-    // LayerMask para especificar qué capas deben ser consideradas en el raycast
     public LayerMask layerMask;
+
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            Ray ray = mainCamera.ScreenPointToRay(mousePosition);
 
+            RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.Log(hit);
-                // Aquí puedes agregar lo que quieras hacer cuando el raycast golpea un objeto
-                // Por ejemplo, puedes llamar a una función en el objeto golpeado
                 hit.collider.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
             }
         }
