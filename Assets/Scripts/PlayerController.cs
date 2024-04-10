@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f; // Velocidad de movimiento del jugador
     public float sensitivity = 2.0f; // Sensibilidad del ratón
+    public float interactionDistance = 10f; // Distancia de interacción
 
     private CharacterController controller;
     private Camera playerCamera;
@@ -44,6 +45,26 @@ public class PlayerController : MonoBehaviour
 
         // Movimiento del jugador usando el controlador de entrada
         controller.Move(moveDirection * speed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("intentando interacturar");
+            // Obtener la dirección hacia la que la cámara está mirando
+            Vector3 raycastDirection = playerCamera.transform.forward;
+
+            // Lanzar un Raycast desde el centro de la cámara
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, raycastDirection, out hit, interactionDistance))
+            {
+                // Verificar si el objeto golpeado es interactuable
+                InteractableObj interactable = hit.collider.GetComponent<InteractableObj>();
+                if (interactable != null)
+                {
+                    // Si es interactuable, llamar al método Interact()
+                    interactable.Interact();
+                }
+            }
+        }
     }
 
 
