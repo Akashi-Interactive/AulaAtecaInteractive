@@ -8,11 +8,11 @@ namespace AulaAtecaInteractive
     {
         public string message = "Este es el mensaje de la nota.";
 
-    public void Interact()
-    {
-        // Aquí puedes mostrar el mensaje en un canvas
-        Debug.Log(message);
-    }
+        public void Interact()
+        {
+            // Aquí puedes mostrar el mensaje en un canvas
+            Debug.Log(message);
+        }
         
     }
 }

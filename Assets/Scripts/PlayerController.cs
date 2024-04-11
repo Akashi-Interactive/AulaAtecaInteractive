@@ -65,7 +65,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+         
     }
+
+       private void OnDrawGizmos()
+        {
+            if (playerCamera != null)
+            {
+                // Dibujar el rayo del raycast en el editor
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance);
+            }
+        }
 
 
     void LateUpdate()
