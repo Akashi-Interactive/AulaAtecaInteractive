@@ -13,6 +13,7 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
     public void OnApplicationQuit()
     {
         OnApplicationQuit();
