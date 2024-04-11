@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AulaAtecaInteractive
 {
-    
+
     public class TestCanvas : MonoBehaviour, InteractableObj
     {
-        [SerializeField] private GameObject objCanvas;
+        [SerializeField] private FadeCanvasTransition objCanvas;
+
+        private bool active = false;
 
        public void Interact(){
-            objCanvas.SetActive(true);
+            active = !active;
+
+            if(active)
+                objCanvas.StartFadeIn();
+            else
+                objCanvas.StartFadeOut();
        }
-       
     }
 }

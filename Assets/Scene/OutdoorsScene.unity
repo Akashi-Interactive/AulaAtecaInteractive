@@ -505,6 +505,8 @@ GameObject:
   - component: {fileID: 1027622893}
   - component: {fileID: 1027622892}
   - component: {fileID: 1027622891}
+  - component: {fileID: 1027622896}
+  - component: {fileID: 1027622895}
   m_Layer: 0
   m_Name: CanvasObj
   m_TagString: Untagged
@@ -541,10 +543,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -595,6 +597,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1027622895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027622890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acbc2cd40642cf4c8674d7bc76aa942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1
+--- !u!225 &1027622896
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027622890}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1195122271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5585b6211036f743a0898992928e16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objCanvas: {fileID: 1027622890}
+  objCanvas: {fileID: 1027622895}
 --- !u!1 &2118673752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092842603433147953, guid: 304085ca51462bf428c18311ddf123fc,
+        type: 3}
+      propertyPath: sensitivity
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8092842603433147953, guid: 304085ca51462bf428c18311ddf123fc,
         type: 3}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +21,8 @@ public class PlayerController : MonoBehaviour
         // Bloquear y ocultar el cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PlayerInputController.Instance.PlayerActions.Interact.started += Interation;
     }
 
     void Update()
@@ -45,39 +45,37 @@ public class PlayerController : MonoBehaviour
 
         // Movimiento del jugador usando el controlador de entrada
         controller.Move(moveDirection * speed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("intentando interacturar");
-            // Obtener la dirección hacia la que la cámara está mirando
-            Vector3 raycastDirection = playerCamera.transform.forward;
-
-            // Lanzar un Raycast desde el centro de la cámara
-            RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, raycastDirection, out hit, interactionDistance))
-            {
-                // Verificar si el objeto golpeado es interactuable
-                InteractableObj interactable = hit.collider.GetComponent<InteractableObj>();
-                if (interactable != null)
-                {
-                    // Si es interactuable, llamar al método Interact()
-                    interactable.Interact();
-                }
-            }
-        }
-
-         
     }
 
-       private void OnDrawGizmos()
+    private void Interation(InputAction.CallbackContext context)
+    {
+        Debug.Log("intentando interacturar");
+        // Obtener la dirección hacia la que la cámara está mirando
+        Vector3 raycastDirection = playerCamera.transform.forward;
+
+        // Lanzar un Raycast desde el centro de la cámara
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, raycastDirection, out hit, interactionDistance))
         {
-            if (playerCamera != null)
+            // Verificar si el objeto golpeado es interactuable
+            InteractableObj interactable = hit.collider.GetComponent<InteractableObj>();
+            if (interactable != null)
             {
-                // Dibujar el rayo del raycast en el editor
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance);
+                // Si es interactuable, llamar al método Interact()
+                interactable.Interact();
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (playerCamera != null)
+        {
+            // Dibujar el rayo del raycast en el editor
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance);
+        }
+    }
 
 
     void LateUpdate()

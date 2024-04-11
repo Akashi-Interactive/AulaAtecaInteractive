@@ -1,3 +1,4 @@
+using AulaAtecaInteractive;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ public class PlayerInputController : MonoBehaviour
     public static PlayerInputController Instance { get; private set; }
     public static event Action OnInteractEvent;
 
+    public PlayerInputActions playerInput { get; private set; }
+    public PlayerInputActions.PlayerActions PlayerActions { get; private set; }
 
     private Vector3 movementDirection;
     private Vector2 lookDirection;
@@ -18,6 +21,9 @@ public class PlayerInputController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+
+            playerInput = new PlayerInputActions();
+            PlayerActions = playerInput.player;
         }
         else
         {
@@ -26,6 +32,10 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        playerInput.Enable();
+    }
 
     public void OnMove(InputValue moveValue)
     {
