@@ -1,0 +1,130 @@
+# Blender MTL File: 'Mac_2.blend'
+# Material Count: 13
+
+newmtl Material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\AppData\Local\Temp\Rar$DI04.000\Blender files\Blender Textures\Dots.png
+map_d C:\\Users\\Mukesh_h\\AppData\\Local\\Temp\\Rar$DI04.000\\Blender files\\Blender Textures\\Dots.png
+
+newmtl Material.000
+Ns 56.862745
+Ka 0.000000 0.000000 0.000000
+Kd 0.603805 0.603805 0.603805
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.000_Bildschirmfoto_2011-1
+Ns 56.862745
+Ka 0.000000 0.000000 0.000000
+Kd 0.603805 0.603805 0.603805
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\AppData\Local\Temp\Rar$DI04.000\Desktop\Bildschirmfoto 2011-10-02 um 12.13.21.png
+
+newmtl Material.000_Mac_front.png
+Ns 56.862745
+Ka 0.000000 0.000000 0.000000
+Kd 0.603805 0.603805 0.603805
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\Users\paulihofbauer\Documents\Blender Backgrounds\Mac_front.png
+
+newmtl Material.001
+Ns 56.862745
+Ka 0.000000 0.000000 0.000000
+Kd 0.603805 0.603805 0.603805
+Ks 0.252747 0.252747 0.252747
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\AppData\Local\Temp\Rar$DI04.000\Blender files\Blender Textures\Mac Desktop.png
+
+newmtl Material.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.004241 0.004241 0.004241
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\AppData\Local\Temp\Rar$DI04.000\Desktop\Bildschirmfoto 2011-10-02 um 12.13.21.png
+
+newmtl Material.002_Mac_front.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.004241 0.004241 0.004241
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\Users\paulihofbauer\Documents\Blender Backgrounds\Mac_front.png
+
+newmtl Material.003
+Ns 19.607843
+Ka 0.000000 0.000000 0.000000
+Kd 0.393106 0.393106 0.393106
+Ks 0.300000 0.300000 0.300000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.137579 0.137579 0.137579
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Mukesh_h\AppData\Local\Temp\Rar$DI04.000\Desktop\Bildschirmfoto 2011-10-02 um 12.13.21.png
+
+newmtl Material.006
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Mukesh_h\\Documents\\keyboard.jpg
+
+newmtl Material.006_keyboard.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\Documents\keyboard.jpg
+
+newmtl Material.006_keyboard.jpg.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Mukesh_h\Documents\keyboard.jpg
+
+newmtl Material.007
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
