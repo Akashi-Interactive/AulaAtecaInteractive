@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        PlayerInputController.Instance.PlayerActions.Interact.started += Interation;
+        PlayerInputController.Instance.PlayerActions.Interact.started += Interaction;
     }
 
     void Update()
@@ -49,42 +49,67 @@ public class PlayerController : MonoBehaviour
         // Movimiento del jugador usando el controlador de entrada
         controller.Move(moveDirection * speed * Time.deltaTime);
 
+        DetectInteractableObject();
+    }
+
+    private void DetectInteractableObject()
+    {
         Vector3 raycastDirection = playerCamera.transform.forward;
 
         // Lanzar un Raycast desde el centro de la cámara
-
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, raycastDirection, out hit, interactionDistance))
         {
             InteractableObj interactable = hit.collider.GetComponent<InteractableObj>();
 
-            if ((detectedInteractableObject != hit.transform.gameObject) && interactable != null)
+            if (interactable != null)
             {
-                detectedInteractableObject = hit.transform.gameObject;
-                detectedInteractableObject.layer = 7;
-                StartCoroutine(_CheckInteractableOutOfDistance(detectedInteractableObject));
+                if (detectedInteractableObject != hit.transform.gameObject)
+                {
+                    detectedInteractableObject = hit.transform.gameObject;
+                    detectedInteractableObject.layer = 7;
+                    StopAllCoroutines();
+                    StartCoroutine(_CheckInteractableOutOfDistance(detectedInteractableObject));
+                }
+            }
+            else
+            {
+                ResetDetectedObject();
             }
         }
         else
         {
+            ResetDetectedObject();
+        }
+    }
+
+    private void ResetDetectedObject()
+    {
+        if (detectedInteractableObject != null)
+        {
+            detectedInteractableObject.layer = 0;
             detectedInteractableObject = null;
         }
     }
+
     IEnumerator _CheckInteractableOutOfDistance(GameObject interactableObject)
     {
         RaycastHit hit;
-        while (Physics.Raycast(playerCamera.transform.position, Camera.main.transform.forward, out hit, interactionDistance))
+        while (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionDistance))
         {
-            Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject != interactableObject)
+            {
                 break;
+            }
             yield return null;
         }
 
-        interactableObject.layer = 0;
-        detectedInteractableObject = null;
+        if (detectedInteractableObject == interactableObject)
+        {
+            interactableObject.layer = 0;
+            detectedInteractableObject = null;
+        }
     }
-
 
     void LateUpdate()
     {
@@ -95,8 +120,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * lookInput.x * sensitivity);
     }
 
-
-    private void Interation(InputAction.CallbackContext context)
+    private void Interaction(InputAction.CallbackContext context)
     {
         // Obtener la dirección hacia la que la cámara está mirando
         Vector3 raycastDirection = playerCamera.transform.forward;
@@ -123,10 +147,8 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance);
         }
-    }  
+    }
 }
-
-
 
 
 
