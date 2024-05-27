@@ -58,7 +58,7 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
             else
             {
                 // If no UI is hit, handle canvas interaction here
-                Debug.Log("World Position: " + worldPosition);
+                //Debug.Log("World Position: " + worldPosition);
             }
         }
         #endregion
@@ -85,8 +85,8 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
 
         public void HandleInteraction(Vector3 hitPosition)
         {
-            // Realizar lógica en el Canvas basada en la posición del impacto
-            Debug.Log("Impacto en la posición del Canvas: " + hitPosition);
+            // Realizar lï¿½gica en el Canvas basada en la posiciï¿½n del impacto
+            Debug.Log("Impacto en la posiciï¿½n del Canvas: " + hitPosition);
         }
     }
 }
