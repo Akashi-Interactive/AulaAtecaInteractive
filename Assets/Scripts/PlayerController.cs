@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     private void Interation(InputAction.CallbackContext context)
     {
-        Debug.Log("intentando interacturar");
         // Obtener la dirección hacia la que la cámara está mirando
         Vector3 raycastDirection = playerCamera.transform.forward;
 
