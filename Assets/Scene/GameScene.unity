@@ -995,12 +995,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -951608786083511892, guid: 8c25fc0945bdce64b92f18b927ae7b7f, type: 3}
---- !u!33 &287599998 stripped
-MeshFilter:
-  m_CorrespondingSourceObject: {fileID: -8118358669666199705, guid: 8c25fc0945bdce64b92f18b927ae7b7f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1259965131}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &290819636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1398447761454871604, guid: 05d45081b3753034598c3fc546d40764,
@@ -4063,6 +4057,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: 8c25fc0945bdce64b92f18b927ae7b7f, type: 3}
+--- !u!33 &1016137020 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 6551726144519698248, guid: 8c25fc0945bdce64b92f18b927ae7b7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 699726604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1024188980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4304934632183970014, guid: 8c25fc0945bdce64b92f18b927ae7b7f,
@@ -7296,7 +7296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d1c955b6698bf4d9ad7b7f3c25f5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPrint: {fileID: 287599998}
+  objectToPrint: {fileID: 1016137020}
   amountToPrint: 0
   printingSpeed: 0.01
   printedObject: {fileID: 1133370933}
