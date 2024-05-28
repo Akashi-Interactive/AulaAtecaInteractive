@@ -44,7 +44,7 @@ public class PrintObject : MonoBehaviour, InteractableObj
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!finishedPrinting) {
             float y = meshToPrint.bounds.size.y * amountToPrint;
