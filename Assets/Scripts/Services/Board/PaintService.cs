@@ -11,7 +11,6 @@ namespace AulaAtecaInteractive.Assets.Scripts.BoardService
         public Color color = Color.black;
         public RectTransform canvasRectTransform;
 
-        private bool isPainting = false;
 
         private void Update()
         {
@@ -48,7 +47,6 @@ namespace AulaAtecaInteractive.Assets.Scripts.BoardService
 
         void StartPainting()
         {
-            isPainting = true;
             lineRenderer.positionCount = 0; // Restablecer el contador de posiciones
             lineRenderer.material = material;
             lineRenderer.startWidth = 0.1f;
@@ -82,7 +80,6 @@ namespace AulaAtecaInteractive.Assets.Scripts.BoardService
 
         void StopPainting()
         {
-            isPainting = false;
         }
     }
 }

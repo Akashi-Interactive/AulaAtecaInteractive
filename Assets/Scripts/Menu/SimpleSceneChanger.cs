@@ -8,6 +8,7 @@ public class SimpleSceneChanger : MonoBehaviour
 
     public void ChangeOption()
     {
+        /*
         if (option.transform.localScale == Vector3.one)
         {
             option.transform.localScale = new Vector3(0.0000001f, 0.0000001f, 0.0000001f);
@@ -18,6 +19,17 @@ public class SimpleSceneChanger : MonoBehaviour
             option.SetActive(true);
             option.transform.localScale = Vector3.one;
             menu.transform.localScale = new Vector3(0.0000001f, 0.0000001f, 0.0000001f);
+        }*/
+
+        if(option.activeSelf)
+        {
+            option.SetActive(false);
+            menu.SetActive(true);
+        }
+        else
+        {
+            option.SetActive(true);
+            menu.SetActive(false);
         }
     }
 
