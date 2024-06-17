@@ -4448,7 +4448,7 @@ GameObject:
   - component: {fileID: 1133370934}
   - component: {fileID: 1133370936}
   - component: {fileID: 1133370935}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ObjetoImpreso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7250,7 +7250,7 @@ GameObject:
   - component: {fileID: 1841724776}
   - component: {fileID: 1841724778}
   - component: {fileID: 1841724777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Dprinter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7729,7 +7729,7 @@ GameObject:
   - component: {fileID: 1910143892}
   - component: {fileID: 1910143891}
   - component: {fileID: 1910143896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Interactabletest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9264,28 +9264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8294608124136074451
 GameObject:
   m_ObjectHideFlags: 0
