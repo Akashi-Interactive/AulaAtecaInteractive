@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
                 if (detectedInteractableObject != hit.transform.gameObject)
                 {
                     detectedInteractableObject = hit.transform.gameObject;
-                    detectedInteractableObject.layer = 7;
+                    detectedInteractableObject.layer = 6;
                     StopAllCoroutines();
                     StartCoroutine(_CheckInteractableOutOfDistance(detectedInteractableObject));
                 }
