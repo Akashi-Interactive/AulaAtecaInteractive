@@ -15,11 +15,13 @@ namespace AulaAtecaInteractive
         public float offsetDistance; // Distancia hacia adelante del jugador
         public float tiltAngle; // Ángulo de inclinación hacia el techo
         public float heightOffset; // Desplazamiento en altura
+        public float animationDuration = 0.5f; // Duración de la animación
 
         void Start()
         {
             mainCamera = Camera.main; // Obtener la cámara principal
             canvas.SetActive(false); // Asegurarse de que el canvas esté desactivado al inicio
+            canvas.transform.localScale = Vector3.zero; // Escala inicial en cero para la animación
         }
 
         public void Interact()
@@ -31,6 +33,7 @@ namespace AulaAtecaInteractive
                 OrientCanvasTowardsPlayer();
                 currentSlideIndex = 0;
                 ShowSlide();
+                StartCoroutine(ScaleCanvas(Vector3.one, animationDuration));
             }
             else
             {
@@ -42,8 +45,8 @@ namespace AulaAtecaInteractive
                 }
                 else
                 {
-                    // Si ya se mostraron todas las diapositivas, cerrar el canvas
-                    canvas.SetActive(false);
+                    // Si ya se mostraron todas las diapositivas, iniciar animación de cierre
+                    StartCoroutine(ScaleCanvas(Vector3.zero, animationDuration, () => canvas.SetActive(false)));
                 }
             }
         }
@@ -61,12 +64,28 @@ namespace AulaAtecaInteractive
             // Mover el canvas un poco al frente del jugador y ajustar la altura
             Vector3 directionToPlayer = mainCamera.transform.position - canvas.transform.position;
             directionToPlayer.y = 0; // Mantener la rotación en el eje Y solamente
-           
+
             // Rotar el canvas hacia el jugador
             canvas.transform.rotation = Quaternion.LookRotation(-directionToPlayer);
 
             // Aplicar inclinación hacia el techo
             canvas.transform.Rotate(Vector3.right, tiltAngle);
+        }
+
+        private IEnumerator ScaleCanvas(Vector3 targetScale, float duration, System.Action onComplete = null)
+        {
+            Vector3 initialScale = canvas.transform.localScale;
+            float timeElapsed = 0f;
+
+            while (timeElapsed < duration)
+            {
+                canvas.transform.localScale = Vector3.Lerp(initialScale, targetScale, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            canvas.transform.localScale = targetScale;
+            onComplete?.Invoke();
         }
     }
 }
