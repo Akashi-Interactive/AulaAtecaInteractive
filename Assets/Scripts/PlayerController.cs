@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private AudioClip interactClip;
+
     public float speed = 5.0f; // Velocidad de movimiento del jugador
     public float sensitivity = 2.0f; // Sensibilidad del ratón
     public float interactionDistance = 10f; // Distancia de interacción
@@ -135,6 +137,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Si es interactuable, llamar al método Interact()
                 interactable.Interact();
+                AudioSource.PlayClipAtPoint(interactClip, transform.position, PlayerPrefs.GetFloat("SavedSFXVolume"));
             }
         }
     }
