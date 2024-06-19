@@ -1,25 +1,85 @@
 using UnityEngine;
 
-public class Teleport : MonoBehaviour, InteractableObj
+namespace AulaAtecaInteractive
 {
-    public GameObject targetObject; // El objeto destino al que se teletransportará el jugador
-
-    public void Interact()
+    public class Teleport : MonoBehaviour, InteractableObj
     {
-        TeleportToTarget();
-    }
+        public GameObject targetObject; // El objeto destino al que se teletransportará el jugador
+        public string playerObjectName = "Player"; // Nombre del objeto del jugador
 
-    private void TeleportToTarget()
-    {
-        if (targetObject != null)
+        private Transform playerTransform;
+        private CharacterController playerController;
+
+        private void Start()
         {
-            Transform playerTransform = GetComponent<Transform>();
-            playerTransform.position = targetObject.transform.position;
+            // Buscar el objeto del jugador por su nombre y obtener su transform
+            GameObject playerObject = GameObject.Find(playerObjectName);
+            if (playerObject != null)
+            {
+                playerTransform = playerObject.transform;
+                playerController = playerObject.GetComponent<CharacterController>();
+                if (playerController == null)
+                {
+                    Debug.LogError("CharacterController component not found on the player object.");
+                }
+                else
+                {
+                    Debug.Log("Player object and CharacterController found and assigned.");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Player object with name '{playerObjectName}' not found.");
+            }
+
+            if (targetObject != null)
+            {
+                Debug.Log("Target object assigned.");
+            }
+            else
+            {
+                Debug.LogError("Target object is not assigned.");
+            }
         }
-        else
+
+        public void Interact()
         {
-            Debug.LogError("Target object is not assigned.");
+            Debug.Log("Interact method called.");
+            TeleportToTarget();
+        }
+
+        private void TeleportToTarget()
+        {
+            if (targetObject != null && playerTransform != null && playerController != null)
+            {
+                Debug.Log("Teleporting player...");
+
+                // Temporarily disable the CharacterController to teleport the player
+                playerController.enabled = false;
+
+                // Teleport the player and match the target object's rotation
+                playerTransform.position = targetObject.transform.position;
+                playerTransform.rotation = targetObject.transform.rotation;
+
+                playerController.enabled = true;
+
+                Debug.Log("Player teleported to target position and rotation.");
+            }
+            else
+            {
+                if (targetObject == null)
+                {
+                    Debug.LogError("Target object is not assigned.");
+                }
+                if (playerTransform == null)
+                {
+                    Debug.LogError($"Player object with name '{playerObjectName}' not found.");
+                }
+                if (playerController == null)
+                {
+                    Debug.LogError("CharacterController component not found on the player object.");
+                }
+            }
         }
     }
 }
-
