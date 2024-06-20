@@ -1,3 +1,4 @@
+using AulaAtecaInteractive.Assets.Scripts.BoardService;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +40,26 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
         /// </summary>
         private void GetCanvasClickPosition()
         {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                PaintService paintService = hit.collider.GetComponent<PaintService>();
+                if (paintService != null)
+                {
+                    // Convertir la posición del impacto en coordenadas locales del objeto impactado
+                    Vector3 localHitPoint = hit.transform.InverseTransformPoint(hit.point);
+
+                    // Convertir la posición local a coordenadas UV (entre 0 y 1)
+                    Vector2 uv = new Vector2(
+                        (localHitPoint.x + hit.collider.bounds.extents.x) / (hit.collider.bounds.size.x),
+                        (localHitPoint.y + hit.collider.bounds.extents.y) / (hit.collider.bounds.size.y)
+                    );
+
+                    paintService.Paint(uv);
+                    Debug.Log("UI Element Hit! " + uv);
+                }
+            }            /*
             var mousePosition = Mouse.current.position.ReadValue();
 
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, mainCamera.nearClipPlane));
@@ -54,12 +75,25 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
             {
                 // If UI is hit, handle UI interaction here
                 Debug.Log("UI Element Hit!");
+                PaintService paintService = results[0].gameObject.GetComponent<PaintService>();
+                if (paintService != null)
+                {
+                    Vector2 uv;
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                        results[0].gameObject.GetComponent<RectTransform>(),
+                        mousePosition,
+                        mainCamera,
+                        out uv
+                    );
+                    paintService.Paint(uv);
+                    Debug.Log("UI Element Hit! " + uv);
+                }
             }
             else
             {
                 // If no UI is hit, handle canvas interaction here
                 //Debug.Log("World Position: " + worldPosition);
-            }
+            }*/
         }
         #endregion
 

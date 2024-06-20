@@ -1,85 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AulaAtecaInteractive.Assets.Scripts.BoardService
 {
     public class PaintService : MonoBehaviour
     {
-        public LineRenderer lineRenderer;
-        public Material material;
-        public Color color = Color.black;
-        public RectTransform canvasRectTransform;
+        public Color currentColor = Color.black; // Color actual de pintura
+        public Texture2D texture; // Textura sobre la que se pinta
+        public RawImage rawImage;
 
-
-        private void Update()
+        void Start()
         {
-            // Si el usuario hace clic izquierdo (o toca la pantalla)
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Lanza un rayo desde la cámara del jugador
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+            int textureWidth = 1024; // Aumentar la resolución
+            int textureHeight = 1024; // Aumentar la resolución
+            texture = new Texture2D(textureWidth, textureHeight);
+            rawImage.texture = texture;
 
-                // Comprueba si el rayo golpea el Canvas
-                if (Physics.Raycast(ray, out hit))
+            for (int x = 0; x < texture.width; x++)
+            {
+                for (int y = 0; y < texture.height; y++)
                 {
-                    // Si golpea el Canvas, comienza a pintar
-                    if (hit.collider.gameObject == canvasRectTransform.gameObject)
-                    {
-                        StartPainting();
-                    }
+                    texture.SetPixel(x, y, Color.white);
                 }
             }
-            // Si el usuario mantiene presionado el botón izquierdo del ratón (o toca la pantalla)
-            else if (Input.GetMouseButton(0))
-            {
-                // Dibuja la línea sobre el Canvas
-                DrawLine();
-            }
-            // Si el usuario suelta el botón izquierdo del ratón (o levanta el dedo de la pantalla)
-            else if (Input.GetMouseButtonUp(0))
-            {
-                // Deja de pintar
-                StopPainting();
-            }
+            texture.Apply();
         }
 
-        void StartPainting()
+        public void Paint(Vector2 uv)
         {
-            lineRenderer.positionCount = 0; // Restablecer el contador de posiciones
-            lineRenderer.material = material;
-            lineRenderer.startWidth = 0.1f;
-            lineRenderer.endWidth = 0.1f;
-            lineRenderer.useWorldSpace = false;
-        }
+            int x = (int)(uv.x * texture.width);
+            int y = (int)(uv.y * texture.height);
 
-        void DrawLine()
-        {
-            // Lanza un rayo desde la cámara del jugador
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            // Comprueba si el rayo golpea el Canvas
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.Log(hit.collider.gameObject.name);
-
-                // Si golpea el Canvas, dibuja la línea sobre el Canvas
-                if (hit.collider.gameObject == canvasRectTransform.gameObject)
-                {
-                    // Obtén la posición local del punto de impacto
-                    RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, hit.point, Camera.main, out Vector2 localMousePosition);
-
-                    // Añade la posición al LineRenderer en coordenadas locales del Canvas
-                    lineRenderer.positionCount++;
-                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, localMousePosition);
-                }
-            }
-        }
-
-        void StopPainting()
-        {
+            texture.SetPixel(x, y, currentColor);
+            texture.Apply();
         }
     }
 }
