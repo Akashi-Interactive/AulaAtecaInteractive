@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
         playerInputController = PlayerInputController.Instance;
 
         // Bloquear y ocultar el cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+     /*   Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;*/
+        CursorController.DisableCursor();
 
         PlayerInputController.Instance.PlayerActions.Interact.started += Interaction;
     }
