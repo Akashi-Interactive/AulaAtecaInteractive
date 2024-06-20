@@ -44,20 +44,11 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                PaintService paintService = hit.collider.GetComponent<PaintService>();
-                if (paintService != null)
+                Debug.Log("Impacto en la posici�n del Canvas: " + hit.collider.gameObject);
+                CanvasService canvasService;
+                if(hit.collider.gameObject.TryGetComponent(out canvasService))
                 {
-                    // Convertir la posición del impacto en coordenadas locales del objeto impactado
-                    Vector3 localHitPoint = hit.transform.InverseTransformPoint(hit.point);
-
-                    // Convertir la posición local a coordenadas UV (entre 0 y 1)
-                    Vector2 uv = new Vector2(
-                        (localHitPoint.x + hit.collider.bounds.extents.x) / (hit.collider.bounds.size.x),
-                        (localHitPoint.y + hit.collider.bounds.extents.y) / (hit.collider.bounds.size.y)
-                    );
-
-                    paintService.Paint(uv);
-                    Debug.Log("UI Element Hit! " + uv);
+                    canvasService.SetCanvasToScreen();
                 }
             }            /*
             var mousePosition = Mouse.current.position.ReadValue();

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AulaAtecaInteractive.Assets.Scripts.BoardService
 {
     public class DrawWithMouse : MonoBehaviour
     {
+        public bool canDraw = false;
         private LineRenderer line;
         private Vector3 previousPosition;
 
@@ -19,7 +18,7 @@ namespace AulaAtecaInteractive.Assets.Scripts.BoardService
 
         private void Update()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && canDraw)
             {
                 Vector3 currentPosirion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currentPosirion.z = 0;
@@ -34,4 +33,5 @@ namespace AulaAtecaInteractive.Assets.Scripts.BoardService
         }
     }
 }
+
 
