@@ -1187,6 +1187,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: ffc914f79f27e04468b270310d726bee, type: 3}
+--- !u!33 &188969296 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 5580501726511545725, guid: 05d45081b3753034598c3fc546d40764,
+    type: 3}
+  m_PrefabInstance: {fileID: 918810206856826637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &189591392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8c25fc0945bdce64b92f18b927ae7b7f,
@@ -5842,6 +5848,80 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3884190163033668631, guid: 87738a27e657e304180df5b862cd777f, type: 3}
+--- !u!1 &739027925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739027926}
+  - component: {fileID: 739027928}
+  - component: {fileID: 739027927}
+  m_Layer: 0
+  m_Name: impresora
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &739027926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739027925}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -37.57, y: 7.74, z: -23.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1133370934}
+  - {fileID: 1841724775}
+  m_Father: {fileID: 1340527706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &739027927
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739027925}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0089035, y: 4.14616, z: 4.071205}
+  m_Center: {x: -0.011642456, y: 1.5730801, z: -0.056488037}
+--- !u!114 &739027928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739027925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d1c955b6698bf4d9ad7b7f3c25f5aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPrint: {fileID: 188969296}
+  amountToPrint: 0
+  printingSpeed: 0.01
+  color: {r: 1, g: 0, b: 0, a: 1}
+  objectScale: {x: 1, y: 1, z: 1}
+  printedObject: {fileID: 1133370933}
 --- !u!4 &746423664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7fbb9611513d38341ac68fc0d673d283,
@@ -7679,12 +7759,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: 8c25fc0945bdce64b92f18b927ae7b7f, type: 3}
---- !u!33 &1016137020 stripped
-MeshFilter:
-  m_CorrespondingSourceObject: {fileID: 6551726144519698248, guid: 8c25fc0945bdce64b92f18b927ae7b7f,
-    type: 3}
-  m_PrefabInstance: {fileID: 699726604}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1022378078 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: c5e94d0cd8746d640b08202930499787,
@@ -8222,11 +8296,11 @@ Transform:
   m_GameObject: {fileID: 1133370933}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.13, y: 11.97, z: -24.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1340527706}
+  m_Father: {fileID: 739027926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1133370935
 MeshRenderer:
@@ -9548,8 +9622,7 @@ Transform:
   - {fileID: 1910143895}
   - {fileID: 625354199}
   - {fileID: 1906628857}
-  - {fileID: 1133370934}
-  - {fileID: 1841724775}
+  - {fileID: 739027926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355498509 stripped
@@ -13105,8 +13178,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841724775}
-  - component: {fileID: 1841724779}
-  - component: {fileID: 1841724776}
   - component: {fileID: 1841724778}
   - component: {fileID: 1841724777}
   m_Layer: 0
@@ -13125,33 +13196,12 @@ Transform:
   m_GameObject: {fileID: 1841724774}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.13, y: 7.68, z: -23.57}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1340527706}
+  m_Father: {fileID: 739027926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1841724776
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841724774}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1841724777
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13202,22 +13252,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841724774}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1841724779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841724774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d1c955b6698bf4d9ad7b7f3c25f5aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToPrint: {fileID: 1016137020}
-  amountToPrint: 0
-  printingSpeed: 0.01
-  printedObject: {fileID: 1133370933}
 --- !u!1 &1848397467
 GameObject:
   m_ObjectHideFlags: 0

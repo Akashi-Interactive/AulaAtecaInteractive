@@ -8,18 +8,21 @@ public class PrintObject : MonoBehaviour, InteractableObj
     [SerializeField]
     private MeshFilter objectToPrint;
 
-    [SerializeField, Range (0, 1)]
+    [SerializeField, Range(0, 1)]
     private float amountToPrint;
-
-
-
 
     [SerializeField]
     private float printingSpeed = 0.01f;
 
+    [SerializeField]
+    private Color color = Color.white;
+
+    [SerializeField]
+    private Vector3 objectScale = Vector3.one; // Añadir control de escala
+
     private Mesh meshToPrint;
     private float meshToPrintMax;
-    private float meshToPrintMin;
+    private Vector3 meshToPrintMin;
     private float meshToPrintHeigth;
 
     private List<Vector3> usedVertices;
@@ -39,16 +42,15 @@ public class PrintObject : MonoBehaviour, InteractableObj
         ResetMesh();
     }
 
-    public void Interact(){
+    public void Interact()
+    {
         StartPrinting();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (!finishedPrinting) {
-            float y = meshToPrint.bounds.size.y * amountToPrint;
-
+        if (!finishedPrinting)
+        {
             amountToPrint += printingSpeed;
             if (amountToPrint >= 1)
             {
@@ -65,7 +67,7 @@ public class PrintObject : MonoBehaviour, InteractableObj
         List<int> currentTriangleInRangeVertices = new List<int>();
         List<int> currentTriangleOutRangeVertices = new List<int>();
 
-        float y = meshToPrintMin + meshToPrintHeigth * amountToPrint;
+        float y = meshToPrintMin.y + meshToPrintHeigth * amountToPrint;
 
         Mesh mesh = new Mesh();
 
@@ -75,11 +77,12 @@ public class PrintObject : MonoBehaviour, InteractableObj
         {
             if (verticesLeftToUse[n].y <= y)
             {
-                vertices.Add(verticesLeftToUse[n]);
+                Vector3 scaledVertex = Vector3.Scale(verticesLeftToUse[n], objectScale); // Aplicar escala
+                vertices.Add(scaledVertex);
                 verticeIReferences.Add(leftVerticeIReferences[n], vertices.Count - 1);
                 usedVertices.Add(verticesLeftToUse[n]);
-                verticesLeftToUse.Remove(verticesLeftToUse[n]);
-                leftVerticeIReferences.Remove(leftVerticeIReferences[n]);
+                verticesLeftToUse.RemoveAt(n);
+                leftVerticeIReferences.RemoveAt(n);
             }
             else
             {
@@ -112,9 +115,7 @@ public class PrintObject : MonoBehaviour, InteractableObj
                 triangles.Add(verticeIReferences[trianglesToComplete[i]]);
                 triangles.Add(verticeIReferences[trianglesToComplete[i + 1]]);
                 triangles.Add(verticeIReferences[trianglesToComplete[i + 2]]);
-                trianglesToComplete.RemoveAt(i);
-                trianglesToComplete.RemoveAt(i);
-                trianglesToComplete.RemoveAt(i);
+                trianglesToComplete.RemoveRange(i, 3);
             }
             else
             {
@@ -123,10 +124,12 @@ public class PrintObject : MonoBehaviour, InteractableObj
                     if (currentTriangleOutRangeVertices[0] == trianglesToComplete[i + 1])
                     {
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
-                        vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[1]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
+                        Vector3 newVertex1 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[1]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        Vector3 newVertex2 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        vertices.Add(Vector3.Scale(newVertex1, objectScale)); // Aplicar escala
                         triangles.Add(vertices.Count - 1);
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[1]]);
-                        vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
+                        vertices.Add(Vector3.Scale(newVertex2, objectScale)); // Aplicar escala
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
                         triangles.Add(vertices.Count - 1);
                         triangles.Add(vertices.Count - 2);
@@ -135,37 +138,40 @@ public class PrintObject : MonoBehaviour, InteractableObj
                     {
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[1]]);
-                        vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[1]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
+                        Vector3 newVertex1 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[1]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        Vector3 newVertex2 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        vertices.Add(Vector3.Scale(newVertex1, objectScale)); // Aplicar escala
                         triangles.Add(vertices.Count - 1);
-                        vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
+                        vertices.Add(Vector3.Scale(newVertex2, objectScale)); // Aplicar escala
                         triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
                         triangles.Add(vertices.Count - 2);
                         triangles.Add(vertices.Count - 1);
                     }
                 }
-                else
+                else if (currentTriangleInRangeVertices.Count == 1)
                 {
-                    if (currentTriangleInRangeVertices.Count == 1)
-                    {
-                        vertices.Add(meshToPrint.vertices[trianglesToComplete[i + 1]]);
-                        vertices.Add(meshToPrint.vertices[trianglesToComplete[i + 2]]);
+                    vertices.Add(meshToPrint.vertices[trianglesToComplete[i + 1]]);
+                    vertices.Add(meshToPrint.vertices[trianglesToComplete[i + 2]]);
 
-                        if (currentTriangleInRangeVertices[0] == trianglesToComplete[i + 1])
-                        {
-                            vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
-                            triangles.Add(vertices.Count - 1);
-                            triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
-                            vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[1]]));
-                            triangles.Add(vertices.Count - 1);
-                        }
-                        else
-                        {
-                            triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
-                            vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]));
-                            triangles.Add(vertices.Count - 1);
-                            vertices.Add(CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[1]]));
-                            triangles.Add(vertices.Count - 1);
-                        }
+                    if (currentTriangleInRangeVertices[0] == trianglesToComplete[i + 1])
+                    {
+                        Vector3 newVertex1 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        Vector3 newVertex2 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[1]]);
+                        vertices.Add(Vector3.Scale(newVertex1, objectScale)); // Aplicar escala
+                        triangles.Add(vertices.Count - 1);
+                        triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
+                        vertices.Add(Vector3.Scale(newVertex2, objectScale)); // Aplicar escala
+                        triangles.Add(vertices.Count - 1);
+                    }
+                    else
+                    {
+                        triangles.Add(verticeIReferences[currentTriangleInRangeVertices[0]]);
+                        Vector3 newVertex1 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[0]]);
+                        Vector3 newVertex2 = CalculateVertice(y, meshToPrint.vertices[currentTriangleInRangeVertices[0]], meshToPrint.vertices[currentTriangleOutRangeVertices[1]]);
+                        vertices.Add(Vector3.Scale(newVertex1, objectScale)); // Aplicar escala
+                        triangles.Add(vertices.Count - 1);
+                        vertices.Add(Vector3.Scale(newVertex2, objectScale)); // Aplicar escala
+                        triangles.Add(vertices.Count - 1);
                     }
                 }
                 i += 3;
@@ -179,18 +185,16 @@ public class PrintObject : MonoBehaviour, InteractableObj
 
     private Vector3 CalculateVertice(float y, Vector3 vertice1, Vector3 vertice2)
     {
-        float y1, y2, x, x1, x2, z, z1, z2, lambda;
+        float y1 = vertice1.y;
+        float y2 = vertice2.y;
+        float x1 = vertice1.x;
+        float x2 = vertice2.x;
+        float z1 = vertice1.z;
+        float z2 = vertice2.z;
 
-        y1 = vertice1.y;
-        y2 = vertice2.y;
-        x1 = vertice1.x;
-        x2 = vertice2.x;
-        z1 = vertice1.z;
-        z2 = vertice2.z;
-
-        lambda = (y - y1) / (y2 - y1);
-        x = x1 + lambda * (x2 - x1);
-        z = z1 + lambda * (z2 - z1);
+        float lambda = (y - y1) / (y2 - y1);
+        float x = x1 + lambda * (x2 - x1);
+        float z = z1 + lambda * (z2 - z1);
 
         return new Vector3(x, y, z);
     }
@@ -217,13 +221,13 @@ public class PrintObject : MonoBehaviour, InteractableObj
         meshToPrint = objectToPrint.mesh;
 
         meshToPrintMax = meshToPrint.vertices[0].y;
-        meshToPrintMin = meshToPrintMax;
+        meshToPrintMin = meshToPrint.vertices[0];
 
         for (int i = 1; i < meshToPrint.vertices.Length; i++)
         {
-            if (meshToPrint.vertices[i].y < meshToPrintMin)
+            if (meshToPrint.vertices[i].y < meshToPrintMin.y)
             {
-                meshToPrintMin = meshToPrint.vertices[i].y;
+                meshToPrintMin = meshToPrint.vertices[i];
             }
 
             if (meshToPrint.vertices[i].y > meshToPrintMax)
@@ -237,7 +241,11 @@ public class PrintObject : MonoBehaviour, InteractableObj
             leftVerticeIReferences.Add(i);
         }
 
-        meshToPrintHeigth = meshToPrintMax - meshToPrintMin;
+        meshToPrintHeigth = meshToPrintMax - meshToPrintMin.y;
+
+        printedObject.transform.localPosition = new Vector3(0, 0, 0) - meshToPrintMin;
+        printedObject.transform.localScale = objectScale; // Aplicar escala al objeto impreso
+        printedObject.GetComponent<Renderer>().material.SetColor("_Color", color);
 
         verticesLeftToUse = meshToPrint.vertices.ToList();
         trianglesToComplete = meshToPrint.triangles.ToList();
