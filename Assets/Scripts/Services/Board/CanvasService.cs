@@ -10,6 +10,7 @@ public class CanvasService : MonoBehaviour
     private RenderMode originalRenderMode;
     public GameObject boardCanvas;
     public DrawWithMouse drawWithMouse;
+    public PlayerController playerController;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class CanvasService : MonoBehaviour
         boardCanvas.SetActive(true);
         drawWithMouse.canDraw = true;
         CursorController.EnableCursor();
+        playerController.SetCanMove(false);
     }
 
     public void SetCanvasToOriginal()
@@ -37,5 +39,7 @@ public class CanvasService : MonoBehaviour
         boardCanvas.SetActive(false);
         drawWithMouse.canDraw = false;
         CursorController.DisableCursor();
+        AudioManager.Instance.UnPauseAudio();
+        playerController.SetCanMove(true);
     }
 }

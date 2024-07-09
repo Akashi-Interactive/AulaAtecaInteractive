@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInputController playerInputController;
     private GameObject detectedInteractableObject = null;
 
+    private bool canMove = true;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -33,6 +35,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         // Obtener la dirección hacia la que la cámara está mirando
         Vector3 forward = playerCamera.transform.forward;
         forward.y = 0f; // Asegurarse de que el movimiento sea en el plano horizontal
@@ -116,6 +123,11 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         Vector2 lookInput = playerInputController.GetPlayerInputLookDirection();
         rotationX -= lookInput.y * sensitivity;
         rotationX = Mathf.Clamp(rotationX, -90, 90);
@@ -151,6 +163,11 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance);
         }
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
     }
 }
 

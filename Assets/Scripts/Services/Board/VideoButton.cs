@@ -8,5 +8,6 @@ public class VideoButton : MonoBehaviour
     public void PlayVideo()
     {
         VideoService.Instance.PlayVideo(videoClip);
+        AudioManager.Instance.PauseAudio();
     }
 }

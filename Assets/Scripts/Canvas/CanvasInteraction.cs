@@ -14,6 +14,7 @@ namespace AulaAtecaInteractive.Assets.Scripts.Canvas
     {
         [SerializeField] private EventSystem eventSystem;
         [SerializeField] private LayerMask uiLayerMask;
+        [SerializeField] private PlayerController player;
 
         private Camera mainCamera;
 
