@@ -243,9 +243,9 @@ public class PrintObject : MonoBehaviour, InteractableObj
 
         meshToPrintHeigth = meshToPrintMax - meshToPrintMin.y;
 
-        printedObject.transform.localPosition = new Vector3(0, 0, 0) - meshToPrintMin;
-        printedObject.transform.localScale = objectScale; // Aplicar escala al objeto impreso
-        printedObject.GetComponent<Renderer>().material.SetColor("_Color", color);
+        //printedObject.transform.localPosition = new Vector3(0, 0, 0) - meshToPrintMin;
+        //printedObject.transform.localScale = objectScale; // Aplicar escala al objeto impreso
+        //printedObject.GetComponent<Renderer>().material.SetColor("_Color", color);
 
         verticesLeftToUse = meshToPrint.vertices.ToList();
         trianglesToComplete = meshToPrint.triangles.ToList();
