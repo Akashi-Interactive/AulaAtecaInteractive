@@ -13,6 +13,7 @@ namespace AulaAtecaInteractive
         public float rotationSpeed = 10f; // Velocidad de rotación del modelo
         public float heightOffset = 1f; // Desplazamiento en altura
         public Vector3 initialScale = Vector3.one; // Escala inicial del modelo
+        public Vector3 rotationOffset = Vector3.zero; // Offset de rotación
 
         private bool isInteracting = false; // Para verificar si está interactuando
 
@@ -69,8 +70,8 @@ namespace AulaAtecaInteractive
                 Vector3 directionToPlayer = mainCamera.transform.position - instantiatedModel.transform.position;
                 directionToPlayer.y = 0; // Mantener la rotación en el eje Y solamente
 
-                // Rotar el modelo hacia el jugador
-                instantiatedModel.transform.rotation = Quaternion.LookRotation(-directionToPlayer);
+                // Rotar el modelo hacia el jugador y aplicar el offset de rotación
+                instantiatedModel.transform.rotation = Quaternion.LookRotation(-directionToPlayer) * Quaternion.Euler(rotationOffset);
             }
         }
 
