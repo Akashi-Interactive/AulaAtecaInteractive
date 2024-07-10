@@ -6254,13 +6254,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625354198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.18, y: 5.91, z: 16.54}
+  m_LocalRotation: {x: -0, y: 0.99991155, z: -0, w: 0.013299992}
+  m_LocalPosition: {x: -12.206, y: 5.91, z: 16.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1340527706}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 178.476, z: 0}
 --- !u!114 &625354200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19441,7 +19441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfc0dbcecf24bf4690b77e8e55e819c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itchIoLink: https://dreamforgestudios.carrd.co/
+  itchIoLink: https://remygsp.itch.io/shadow-threat
 --- !u!65 &1876921015
 BoxCollider:
   m_ObjectHideFlags: 0
