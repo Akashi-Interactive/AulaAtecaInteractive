@@ -48,6 +48,11 @@ namespace AulaAtecaInteractive
             TeleportToTarget();
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            TeleportToTarget();
+        }
+
         private void TeleportToTarget()
         {
             if (targetObject != null && playerTransform != null && playerController != null)
